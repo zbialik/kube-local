@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: kube-local
+  name: root-appset
   labels:
-    argocd.zbialik.io/appset: kube-local
+    argocd.zbialik.io/appset: root-appset
 spec:
   generators:
   - git:
@@ -13,7 +13,7 @@ spec:
       - path: k8s/*/*
   template:
     metadata:
-      name: 'kube-local-{{path[1]}}-{{path[2]}}'
+      name: 'root-appset-{{path[1]}}-{{path[2]}}'
       labels:
         argocd.zbialik.io/app: '{{path[2]}}'
     spec:
@@ -27,7 +27,7 @@ spec:
           - CreateNamespace=true
       source:
         targetRevision: main
-        repoURL: https://github.com/zbialik/kube-local.git
+        repoURL: https://github.com/zbialik/root-appset.git
         path: '{{path}}'
       destination: 
         server: https://kubernetes.default.svc
