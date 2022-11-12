@@ -8,7 +8,15 @@ But fear not, the initial deployment includes the creation of the `ApplicationSe
 
 ## Initial Deployment (manual)
 
+
 ```bash
+# clone this repo
 git clone https://github.com/zbialik/kube-local.git
+
+# generate manifests
+helm repo add argo https://argoproj.github.io/argo-helm
+helm template argocd argo/argo-cd -f k8s/argocd/argocd/helm/values.yaml -n argocd > k8s/argocd/argocd/generated.yaml
+
+# initial deploy
 kubectl apply -k k8s/argocd/argocd
 ```
