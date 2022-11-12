@@ -1,0 +1,6 @@
+namespace: argocd
+
+resources:
+- namespace.yaml
+- generated.yaml
+- root-appset.yaml
